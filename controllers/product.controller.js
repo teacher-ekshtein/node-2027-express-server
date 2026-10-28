@@ -19,6 +19,10 @@ export const getProducts = (req, res) => {
     res.json({ data: result, total: productsArr.length });
 };
 
+export const getByName = (req, res) => {
+    console.log('get by name');    
+};
+
 export const addProduct = (req, res) => {
     console.log(req.body);
 
@@ -28,6 +32,10 @@ export const addProduct = (req, res) => {
     } else {
         res.status(409).json({ error: 'missing data' });
     }
+};
+
+export const getByPrice = (req, res) => {
+    console.log('get by price');    
 };
 
 export const updateProduct = (req, res) => {
