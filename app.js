@@ -23,5 +23,6 @@ app.use('/products', productRouter);
 const port = 5000;
 app.listen(port, () => {
     // פונקציה שמתבצעת פעם אחת שהשרת עולה
-    console.log(`Server is running on http://localhost:${port}`)
+    console.log(`Server is running on http://localhost:${port}`);
+    console.log('hello');    
 });
