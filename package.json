@@ -15,8 +15,8 @@
   "type": "module",
   "main": "app.js",
   "scripts": {
-    "start": "node app",
-    "dev": "node --watch app"
+    "start": "node --env-file=.env app",
+    "dev": "node --env-file=.env --watch app"
   },
   "dependencies": {
     "express": "^5.3.0"

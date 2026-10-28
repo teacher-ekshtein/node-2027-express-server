@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
 app.use('/products', productRouter);
 
 // 3. הרצת השרת על כתובת מסוימת
-const port = 5000;
+const port = process.env.PORT ?? 5000;
 app.listen(port, () => {
     // פונקציה שמתבצעת פעם אחת שהשרת עולה
     console.log(`Server is running on http://localhost:${port}`)
