@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addProduct, deleteProduct, getProducts, updateProduct } from "../controllers/product.controller.js";
+import { addProduct, deleteProduct, getProducts, updateProduct, getProductById } from "../controllers/product.controller.js";
 
 const productRouter = Router();
 
@@ -8,6 +8,8 @@ const productRouter = Router();
 // sort - מיון לפי
 // page, limit - עימוד
 productRouter.get('/', getProducts);
+
+productRouter.get('/:id', getProductById);
 
 // הוספת מוצר
 productRouter.post('/', addProduct);

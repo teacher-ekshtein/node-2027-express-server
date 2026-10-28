@@ -19,6 +19,11 @@ export const getProducts = (req, res) => {
     res.json({ data: result, total: productsArr.length });
 };
 
+export const getProductById = (req, res) => {
+    const pr = productsArr.find(p => p.id == req.params.id);
+    return res.json(pr);
+}
+
 export const addProduct = (req, res) => {
     console.log(req.body);
 
