@@ -21,6 +21,9 @@ export const getProducts = (req, res) => {
 
 export const getProductById = (req, res) => {
     const pr = productsArr.find(p => p.id == req.params.id);
+    if (!pr) {
+        return res.status(404).json({ error: 'product not found' })
+    }
     return res.json(pr);
 }
 
