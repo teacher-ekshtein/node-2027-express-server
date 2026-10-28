@@ -48,3 +48,23 @@
 2. `controllers` - the logic (exported functions)
 3. `app.js` - the main file of server
 4. `.gitignore` (from [github template](https://github.com/github/gitignore/blob/main/Node.gitignore))
+
+## Git Commands
+### branches
+```bash
+git branch # רשימת הענפים בפרויקט
+git switch -c <branch_name> # יצירת בראנצ' חדש ומעבר אליו
+git switch <branch_name> # מעבר לבראנצ' קיים
+git merge <branch_name> # מיזוג של ענף
+git branch -d <branch_name> # מחיקת ענף קיים לאחר מיזוג
+git branch -D <branch_name> # מחיקת ענף קיים שלא מיזגנו
+git push origin -u <branch_name> # דחיפת ענף חדש לגיטהאב
+```
+
+### tags
+```bash
+git tag # רשימת כל התגיות
+git tag <tag_name> # יצירת תגית על קומיט נוכחי
+git tag <tag_name> <commit_id> # יצירת תגית על קומיט מסוים
+git push --tags # דחיפת כל התגיות לגיטהאב
+```
