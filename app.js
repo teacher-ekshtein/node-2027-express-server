@@ -20,9 +20,22 @@ app.get('/', (req, res) => {
 });
 
 // קבלת כל המוצרים
+// :נוסיף פרמטרים אופציונליים
+// sort - מיון לפי
+// page, limit - עימוד
 app.get('/products', (req, res) => {
-    // בד"כ נשתמש בפונקציה זו כדי להחזיר אוביקט
-    res.json(productsArr);
+    const { page = 1, limit = 10, sort } = req.query;
+    // זהה לשורה שלעיל
+    // const page = req.query.page ?? 1;
+    // const limit = req.query.limit ?? 10;
+    // const sort = req.query.sort;
+
+    // slice - חותך את המערך ממיקום עד מיקום
+    const result = productsArr.slice((page - 1) * limit, page * limit);
+
+    // כשמבצעים עימוד מקובל להחזיר גם כמה נתונים יש בסה"כ
+    // בשביל שהקליינט ידע כמה עמודים להציג
+    res.json({ data: result, total: productsArr.length });
 });
 
 // הוספת מוצר
@@ -43,7 +56,7 @@ app.put('/products/:id', (req, res) => {
     const id = +req.params.id;
 
     const index = productsArr.findIndex(p => p.id === id);
-    
+
     // TODO: check validations before add
     productsArr[index] = req.body;
 
