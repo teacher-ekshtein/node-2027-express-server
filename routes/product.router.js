@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { addProduct, deleteProduct, getProducts, updateProduct, getProductById } from "../controllers/product.controller.js";
-import { printDate } from "../middlewares/print.middleware.js";
+import { blockDay, printDate } from "../middlewares/print.middleware.js";
 
 const productRouter = Router();
 
@@ -17,10 +17,11 @@ productRouter.get('/', getProducts);
 productRouter.get('/:id', getProductById);
 
 // הוספת מוצר
-productRouter.post('/', addProduct);
+// אפשר להפעיל מידלוואר על ניתוב ספציפי
+productRouter.post('/', blockDay, addProduct);
 
 // עדכון מוצר
-productRouter.put('/:id', updateProduct);
+productRouter.put('/:id', blockDay, updateProduct);
 
 // מחיקת מוצר
 productRouter.delete('/:iddddd', deleteProduct);

@@ -16,4 +16,15 @@ export const printDate = (req, res, next) => {
 // 3. טיפול בשגיאות - { error: { msg: "....", code: 1000 } }
 // 4. הוספת באדי
 // 5. העלאת קבצים
+
 // 6. חסימת שרת בשעות/בימים מסוימים
+export const blockDay = (req, res, next) => {
+    const now = new Date();
+
+    // אם שבת - לא נמשיך הלאה
+    if (now.getDay() === 6) {
+        res.status(400).json({ error: "שבת שלום" });
+    } else { // אחרת - נמשיך
+        next();
+    }
+};

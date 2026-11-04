@@ -1,6 +1,7 @@
 // 1. התקנה+ייבוא
 import createApp, { json } from 'express';
 import productRouter from './routes/product.router.js';
+import { blockDay } from './middlewares/print.middleware.js';
 // import { printDate } from './middlewares/print.middleware.js';
 
 // 2. יצירת שרת משוכלל
@@ -12,6 +13,8 @@ const app = createApp();
 // שולחים מצביע לפונקציה
 // והיא מופעלת אוטומטית לפני כל בקשה
 // app.use(printDate);
+
+// app.use(blockDay);
 
 // השרת יכול לקבל באדי בתור אוביקט גייסון
 app.use(json());
