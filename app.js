@@ -1,6 +1,8 @@
 // 1. התקנה+ייבוא
 import createApp, { json, urlencoded, static as static_ } from 'express';
 import productRouter from './routes/product.router.js';
+import morgan from 'morgan';
+import cors from 'cors';
 
 // 2. יצירת שרת משוכלל
 const app = createApp();
@@ -12,7 +14,17 @@ const app = createApp();
 // והיא מופעלת אוטומטית לפני כל בקשה
 // app.use(printDate);
 
+// הרשאה לכל הקליינטים
+app.use(cors());
+
+// הרשאה לקליינט ספציפי
+app.use(cors({ origin: 'http://127.0.0.1:5500' }));
+
 // app.use(blockDay);
+
+// לוגים
+app.use(morgan('dev'));
+
 
 // השרת יכול לקבל באדי
 // 1. בתור אוביקט גייסון
