@@ -1,7 +1,12 @@
 import { Router } from "express";
 import { addProduct, deleteProduct, getProducts, updateProduct, getProductById } from "../controllers/product.controller.js";
+import { printDate } from "../middlewares/print.middleware.js";
 
 const productRouter = Router();
+
+// יזמן רק כשמגיעים לראוטר של מוצרים
+// products רק כתובות שמתחילות ב
+productRouter.use(printDate);
 
 // קבלת כל המוצרים
 // :נוסיף פרמטרים אופציונליים

@@ -1,11 +1,18 @@
 // 1. התקנה+ייבוא
 import createApp, { json } from 'express';
 import productRouter from './routes/product.router.js';
+// import { printDate } from './middlewares/print.middleware.js';
 
 // 2. יצירת שרת משוכלל
 const app = createApp();
 
 // הוספת הגדרות על השרת
+
+// לא מפעילים את הפונקציה
+// שולחים מצביע לפונקציה
+// והיא מופעלת אוטומטית לפני כל בקשה
+// app.use(printDate);
+
 // השרת יכול לקבל באדי בתור אוביקט גייסון
 app.use(json());
 

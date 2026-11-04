@@ -20,7 +20,7 @@ export const getProducts = (req, res) => {
 };
 
 export const getByName = (req, res) => {
-    console.log('get by name');    
+    console.log('get by name');
 };
 
 export const getProductById = (req, res) => {
@@ -43,7 +43,7 @@ export const addProduct = (req, res) => {
 };
 
 export const getByPrice = (req, res) => {
-    console.log('get by price');    
+    console.log('get by price');
 };
 
 export const updateProduct = (req, res) => {
