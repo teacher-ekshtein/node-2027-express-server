@@ -6,6 +6,7 @@ const productRouter = Router();
 
 // יזמן רק כשמגיעים לראוטר של מוצרים
 // products רק כתובות שמתחילות ב
+// מידלוואר רגיל - בלי לזמן
 productRouter.use(printDate);
 
 // קבלת כל המוצרים
@@ -18,6 +19,7 @@ productRouter.get('/:id', getProductById);
 
 // הוספת מוצר
 // אפשר להפעיל מידלוואר על ניתוב ספציפי
+// מידלוואר קריאטור - עם זימון/סוגריים
 const x = blockDay([4, 7]);
 productRouter.post('/', x, addProduct);
 

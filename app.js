@@ -1,5 +1,5 @@
 // 1. התקנה+ייבוא
-import createApp, { json } from 'express';
+import createApp, { json, urlencoded, static as static_ } from 'express';
 import productRouter from './routes/product.router.js';
 
 // 2. יצירת שרת משוכלל
@@ -14,8 +14,15 @@ const app = createApp();
 
 // app.use(blockDay);
 
-// השרת יכול לקבל באדי בתור אוביקט גייסון
+// השרת יכול לקבל באדי
+// 1. בתור אוביקט גייסון
 app.use(json());
+// 2. FormData מתוך טופס, למשל כשמעלים קובץ ועובדים עם
+app.use(urlencoded({ extended: true }));
+
+// static_('public') - וקורא את כל הקבצים שבה public הולך לתיקיה
+// בכל גישה לשרת יחפש קודם קובץ מתאים בתיקיה
+app.use(static_('public'));
 
 app.get('/', (req, res) => {
     // כך מחזירים טקסט באקספרס
