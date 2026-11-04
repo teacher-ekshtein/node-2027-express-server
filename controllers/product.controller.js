@@ -5,6 +5,8 @@ const productsArr = [
 ];
 
 export const getProducts = (req, res) => {
+    console.log(req.myUser);
+
     const { page = 1, limit = 10, sort } = req.query;
     // זהה לשורה שלעיל
     // const page = req.query.page ?? 1;

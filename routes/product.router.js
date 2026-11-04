@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { addProduct, deleteProduct, getProducts, updateProduct, getProductById } from "../controllers/product.controller.js";
-import { blockDay, printDate } from "../middlewares/print.middleware.js";
+import { blockDay, isAdmin, printDate } from "../middlewares/print.middleware.js";
 
 const productRouter = Router();
 
@@ -13,7 +13,7 @@ productRouter.use(printDate);
 // :נוסיף פרמטרים אופציונליים
 // sort - מיון לפי
 // page, limit - עימוד
-productRouter.get('/', getProducts);
+productRouter.get('/', isAdmin, getProducts);
 
 productRouter.get('/:id', getProductById);
 
