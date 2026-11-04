@@ -18,10 +18,11 @@ productRouter.get('/:id', getProductById);
 
 // הוספת מוצר
 // אפשר להפעיל מידלוואר על ניתוב ספציפי
-productRouter.post('/', blockDay, addProduct);
+const x = blockDay([4, 7]);
+productRouter.post('/', x, addProduct);
 
 // עדכון מוצר
-productRouter.put('/:id', blockDay, updateProduct);
+productRouter.put('/:id', blockDay([7]), updateProduct);
 
 // מחיקת מוצר
 productRouter.delete('/:iddddd', deleteProduct);
