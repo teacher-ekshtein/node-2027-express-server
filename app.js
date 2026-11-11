@@ -1,9 +1,10 @@
 // 1. התקנה+ייבוא
 import createApp, { json, urlencoded, static as static_ } from 'express';
+import { errorHandler, pathNotFound } from './middlewares/errors.middleware.js';
+import userRouter from './routes/user.router.js';
 import productRouter from './routes/product.router.js';
 import morgan from 'morgan';
 import cors from 'cors';
-import { errorHandler, pathNotFound } from './middlewares/errors.middleware.js';
 
 // 2. יצירת שרת משוכלל
 const app = createApp();
@@ -46,6 +47,7 @@ app.get('/', (req, res) => {
 // '/products' - כל הבקשות שמתחילות ב
 // חותך תחילית ואז הולך לראוטר
 app.use('/products', productRouter);
+app.use('/users', userRouter);
 
 // אם אין ניתוב מתאים
 app.use(pathNotFound);
