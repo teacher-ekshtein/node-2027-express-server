@@ -3,6 +3,7 @@ import createApp, { json, urlencoded, static as static_ } from 'express';
 import productRouter from './routes/product.router.js';
 import morgan from 'morgan';
 import cors from 'cors';
+import { errorHandler } from './middlewares/errors.middleware.js';
 
 // 2. יצירת שרת משוכלל
 const app = createApp();
@@ -45,6 +46,10 @@ app.get('/', (req, res) => {
 // '/products' - כל הבקשות שמתחילות ב
 // חותך תחילית ואז הולך לראוטר
 app.use('/products', productRouter);
+
+// חייב להופיע בסוף הקובץ
+// catch תופס את כל השגיאות אוטומטית
+app.use(errorHandler);
 
 // 3. הרצת השרת על כתובת מסוימת
 const port = process.env.PORT ?? 5000;

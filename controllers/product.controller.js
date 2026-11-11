@@ -1,3 +1,5 @@
+import { AppError } from "../utils/AppError.js";
+
 const productsArr = [
     { id: 1, name: 'milk', price: 7 },
     { id: 2, name: 'chocolate', price: 10.5 },
@@ -25,10 +27,17 @@ export const getByName = (req, res) => {
     console.log('get by name');
 };
 
-export const getProductById = (req, res) => {
+export const getProductById = (req, res, next) => {
     const pr = productsArr.find(p => p.id == req.params.id);
     if (!pr) {
-        return res.status(404).json({ error: 'product not found' })
+        // 1.
+        // next שמקבל פרמטר הולך אוטומטית למידלוואר של השגיאות
+        // err את הפרמטר שקיבל ישלח ל
+        // return next(new AppError('product not found', 'resource-not-found', 404));
+        throw new AppError('product not found', 'resource-not-found', 404);
+
+        // לא נזרוק שגיאות כך אלא כמו השורה שלעיל עם נקסט
+        // return res.status(404).json({ error: 'product not found' })
     }
     return res.json(pr);
 }
