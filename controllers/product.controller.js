@@ -1,4 +1,5 @@
 import { AppError } from "../utils/AppError.js";
+import { productSchema } from "../validations/product.validation.js";
 
 const productsArr = [
     { id: 1, name: 'milk', price: 7 },
@@ -45,12 +46,18 @@ export const getProductById = (req, res, next) => {
 export const addProduct = (req, res) => {
     console.log(req.body);
 
-    if (req.body.id && req.body.name && req.body.price) {
-        productsArr.push(req.body);
-        res.status(201).json(req.body);
-    } else {
-        res.status(409).json({ error: 'missing data' });
+    // כברירת מחדל עוצר בשגיאה הראשונה
+    const { error, value } = productSchema.validate(req.body);
+
+    // היתה שגיאה
+    if (error) {
+        throw new AppError(error, 'validation', 409);
     }
+
+    // value - אם לא היתה שגיאה, חוזר האוביקט התקין אחרי כל ההמרות
+    req.body.id = Date.now();
+    productsArr.push(req.body);
+    res.status(201).json(req.body);
 };
 
 export const getByPrice = (req, res) => {

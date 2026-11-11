@@ -20,7 +20,7 @@ productRouter.get('/:id', getProductById);
 // הוספת מוצר
 // אפשר להפעיל מידלוואר על ניתוב ספציפי
 // מידלוואר קריאטור - עם זימון/סוגריים
-const x = blockDay([4, 7]);
+const x = blockDay([3, 7]);
 productRouter.post('/', x, addProduct);
 
 // עדכון מוצר
