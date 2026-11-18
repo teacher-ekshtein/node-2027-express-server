@@ -1,13 +1,18 @@
 // 1. התקנה+ייבוא
+import cors from 'cors';
+import morgan from 'morgan';
 import createApp, { json, urlencoded, static as static_ } from 'express';
+
 import { errorHandler, pathNotFound } from './middlewares/errors.middleware.js';
 import userRouter from './routes/user.router.js';
 import productRouter from './routes/product.router.js';
-import morgan from 'morgan';
-import cors from 'cors';
+import { connectDB } from './config/db.js';
 
 // 2. יצירת שרת משוכלל
 const app = createApp();
+
+// התחברות לדטהבייס
+connectDB();
 
 // הוספת הגדרות על השרת
 
