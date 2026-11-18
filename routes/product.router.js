@@ -3,6 +3,7 @@ import { addProduct, deleteProduct, getProducts, updateProduct, getProductById }
 import { blockDay, isAdmin, printDate } from "../middlewares/print.middleware.js";
 import { joiValidator } from "../middlewares/validator.middleware.js";
 import { productSchema } from "../validations/product.validation.js";
+import { upload } from '../middlewares/upload.middleware.js';
 
 const productRouter = Router();
 
@@ -23,7 +24,9 @@ productRouter.get('/:id', getProductById);
 // אפשר להפעיל מידלוואר על ניתוב ספציפי
 // מידלוואר קריאטור - עם זימון/סוגריים
 const x = blockDay([3, 7]);
-productRouter.post('/', x, joiValidator(productSchema), addProduct);
+
+// upload.single('image') - image היוזר יכול להעלות תמונה שתיכנס בשם 
+productRouter.post('/', x, joiValidator(productSchema), upload.single('image'), addProduct);
 
 // עדכון מוצר
 productRouter.put('/:id', blockDay([7]), joiValidator(productSchema), updateProduct);

@@ -1,7 +1,7 @@
 // 1. התקנה+ייבוא
+import createApp, { json, urlencoded, static as static_ } from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
-import createApp, { json, urlencoded, static as static_ } from 'express';
 
 import { errorHandler, pathNotFound } from './middlewares/errors.middleware.js';
 import userRouter from './routes/user.router.js';
@@ -25,7 +25,7 @@ connectDB();
 app.use(cors());
 
 // הרשאה לקליינט ספציפי
-app.use(cors({ origin: 'http://127.0.0.1:5500' }));
+// app.use(cors({ origin: 'http://127.0.0.1:5500' }));
 
 // app.use(blockDay);
 
