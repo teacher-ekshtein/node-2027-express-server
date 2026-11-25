@@ -5,10 +5,12 @@ import bcrypt from 'bcrypt';
 // חייבים להצפין אותה
 const userSchema = new Schema({
     // _id אם לא כתבנו ייצור אוטומטית
-    username: { type: String, unique: true },
-    email: { type: String, unique: true },
-    password: String,
-    role: String, // admin/user
+
+    // בדיקות תקינות שיתבצעו רק כשמוסיפים/מעדכנים בדטהבייס
+    username: { type: String, unique: true, required: true },
+    email: { type: String, unique: true, required: true },
+    password: { type: String, required: true, minlength: 6 },
+    role: { type: String, enum: ['admin', 'user'], default: 'user' }, // admin/user
 });
 
 // פונקציה שמתבצעת לפני שמירה/עדכון בטבלת משתמשים
@@ -41,6 +43,30 @@ userSchema.methods.checkPasswords = async function (currentPassword) {
     // bcrypt.compare - השוואת סיסמא מוצפנת לרגילה
     return await bcrypt.compare(currentPassword, this.password);
 };
+
+// userSchema.virtual('isInBB').get(function () {
+//     return this.city === "bb";
+// });
+
+// toJSON - פונקציה שמורה
+// פונקציה שנקראת אוטומטית כשמחזירים אוביקט לקליינט מסוג ג'ייסון
+userSchema.set('toJSON', {
+    virtuals: true,
+    transform (doc, converted) {
+        // doc האוביקט המקורי
+        // converted האוביקט שחוזר לקליינט
+
+        // כל אלו לא יחזרו לקליינט
+        delete converted.password;
+        delete converted.__v;
+
+        // id לכל אוביקט של מונגו יש מאפיין מחושב שנקרא - virtual
+        // converted.id = converted._id;
+        delete converted._id;
+
+        // return converted;
+    }
+});
 
 // מחבר את הסכמה לשם של אוסף
 const User = model('User', userSchema);
