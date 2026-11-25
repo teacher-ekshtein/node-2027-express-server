@@ -13,7 +13,8 @@ const userSchema = new Schema({
 
 // פונקציה שמתבצעת לפני שמירה/עדכון בטבלת משתמשים
 userSchema.pre(['save', /update/i], async function () {
-    // TODO: אם לא עדכנו סיסמא - נצא מכאן
+    // אם לא עדכנו סיסמא - נצא מכאן
+    if (!this.isModified('password')) return;
 
     // function הפונקציה הזו חייבת להיות עם
     // this - האוביקט שהולך להישמר בדטהבייס
