@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 // חייבים להצפין אותה
 const userSchema = new Schema({
     // _id אם לא כתבנו ייצור אוטומטית
-    username: String,
+    username: { type: String, unique: true },
     email: { type: String, unique: true },
     password: String,
     role: String, // admin/user
@@ -28,6 +28,19 @@ userSchema.pre(['save', /update/i], async function () {
     // אוטומטית בסוף הפונקציה מפעיל את הפונקציה המקורית
     // ולכן אוטומטית תישמר הסיסמא המוצפנת בדטהבייס    
 });
+
+// פעולה סטטית = שייכת לכל המחלקה - לא לאובייקט
+// userSchema.statics
+
+// פעולה שמופעלת על אובייקט ספציפי
+// this בתוכה יש גישה ל
+// userSchema.methods
+userSchema.methods.checkPasswords = async function (currentPassword) {
+    // this - אוביקט של יוזר מתוך הדטהבייס
+
+    // bcrypt.compare - השוואת סיסמא מוצפנת לרגילה
+    return await bcrypt.compare(currentPassword, this.password);
+};
 
 // מחבר את הסכמה לשם של אוסף
 const User = model('User', userSchema);
