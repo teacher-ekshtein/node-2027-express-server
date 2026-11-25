@@ -11,5 +11,6 @@ export const loginSchema = Joi.object({
 export const registerSchema = Joi.object({
     username: Joi.string().required(),
     password: Joi.string().required(),
+    email: Joi.string().email().required(),
     repeatPassword: Joi.ref('password')
 });
